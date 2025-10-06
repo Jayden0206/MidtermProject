@@ -1,0 +1,28 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f8f9fa;
+}
+
+/* Hero Section */
+.hero {
+    background: url('images/hero.jpg') center/cover no-repeat;
+    height: 70vh;
+}
+
+/* Cards */
+.card img {
+    height: 550px;
+    object-fit: cover;
+}
+
+.card:hover {
+    transform: scale(1.02);
+    transition: 0.3s;
+}
+
+/* Footer */
+footer {
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}

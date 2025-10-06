@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recipes | TasteHub</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+        <a class="navbar-brand fw-bold" href="index.html">TasteHub</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navMenu">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                <li class="nav-item"><a class="nav-link" href="reviews.html">Reviews</a></li>
+                <li class="nav-item"><a class="nav-link" href="chefs.html">Hire a Chef</a></li>
+                <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                <li class="nav-item"><a class="nav-link" href="profile.html">Profile</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- Header -->
+<header class="text-center py-5 bg-light">
+    <h1 class="fw-bold">Explore Recipes</h1>
+    <p class="text-muted">Discover new dishes shared by our community.</p>
+</header>
+
+<!-- Recipe Cards -->
+<div class="container my-5">
+    <div class="row g-4">
+        <div class="col-md-4">
+            <div class="card h-100">
+                <img src="images/dish1.jpg" class="card-img-top" alt="Recipe">
+                <div class="card-body">
+                    <h5 class="card-title">Creamy Garlic Pasta</h5>
+                    <p class="card-text">A quick and delicious Italian-style dinner ready in under 30 minutes.</p>
+                    <button class="btn btn-outline-primary view-recipe">View Recipe</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card h-100">
+                <img src="images/dish2.jpg" class="card-img-top" alt="Recipe">
+                <div class="card-body">
+                    <h5 class="card-title">Spicy Chicken Tacos</h5>
+                    <p class="card-text">Flavor-packed tacos with homemade salsa and lime crema.</p>
+                    <button class="btn btn-outline-primary view-recipe">View Recipe</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card h-100">
+                <img src="images/dish3.jpg" class="card-img-top" alt="Recipe">
+                <div class="card-body">
+                    <h5 class="card-title">Vegan Buddha Bowl</h5>
+                    <p class="card-text">A colorful mix of quinoa, roasted veggies, and creamy tahini dressing.</p>
+                    <button class="btn btn-outline-primary view-recipe">View Recipe</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Footer -->
+<footer class="bg-dark text-light text-center py-3">
+    <p class="mb-0">&copy; 2025 TasteHub</p>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
