@@ -5,9 +5,17 @@ body {
 
 /* Hero Section */
 .hero {
-    background: url('images/hero.jpg') center/cover no-repeat;
-    height: 70vh;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 700px; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.6);
 }
+
 
 /* Cards */
 .card img {

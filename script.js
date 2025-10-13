@@ -62,7 +62,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    // Fake Login System
+    //Login System
     const loginForm = document.getElementById("loginForm");
     const welcomeSection = document.getElementById("welcomeSection");
     const displayName = document.getElementById("displayName");
