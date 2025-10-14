@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", function() {
     if (contactForm) {
         contactForm.addEventListener("submit", function(e) {
             e.preventDefault();
-            alert("Thank you for contacting TasteHub! We’ll get back to you soon.");
+            alert("Thank you for contacting Chefaro! We’ll get back to you soon.");
             contactForm.reset();
         });
     }
@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (contactForm) {
         contactForm.addEventListener("submit", (e) => {
             e.preventDefault();
-            alert("Thank you for contacting TasteHub! We’ll get back to you soon.");
+            alert("Thank you for contacting Chefaro! We’ll get back to you soon.");
             contactForm.reset();
         });
     }
@@ -43,7 +43,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (contactForm) {
         contactForm.addEventListener("submit", (e) => {
             e.preventDefault();
-            alert("Thank you for contacting TasteHub! We’ll get back to you soon.");
+            alert("Thank you for contacting Chefaro! We’ll get back to you soon.");
             contactForm.reset();
         });
     }
