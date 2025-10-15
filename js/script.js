@@ -41,3 +41,15 @@ document.addEventListener("DOMContentLoaded", function() {
             loginForm.classList.remove("d-none");
         });
     }
+
+    // Chef signup form submission
+document.addEventListener("DOMContentLoaded", function() {
+  const chefForm = document.getElementById("chefSignupForm");
+  if (chefForm) {
+    chefForm.addEventListener("submit", function(e) {
+      e.preventDefault();
+      alert("Thank you for signing up as a chef! We'll review your profile shortly.");
+      chefForm.reset();
+    });
+  }
+});

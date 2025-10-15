@@ -34,3 +34,17 @@ footer {
     bottom: 0;
     width: 100%;
 }
+
+/* Chef Signup Page Styling */
+.card {
+  border-radius: 15px;
+}
+
+.btn-primary {
+  background-color: #ff6b35;
+  border: none;
+}
+
+.btn-primary:hover {
+  background-color: #ff875a;
+}
