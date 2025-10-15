@@ -42,13 +42,13 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 
-    // Chef signup form submission
+    // Chef signup
 document.addEventListener("DOMContentLoaded", function() {
   const chefForm = document.getElementById("chefSignupForm");
   if (chefForm) {
     chefForm.addEventListener("submit", function(e) {
       e.preventDefault();
-      alert("Thank you for signing up as a chef! We'll review your profile shortly.");
+      alert("Thank you for signing up, fill out a profile and set your availability");
       chefForm.reset();
     });
   }
