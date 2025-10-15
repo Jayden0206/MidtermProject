@@ -10,55 +10,10 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 });
 
-
-// Contact Form Alert
-document.addEventListener("DOMContentLoaded", () => {
-    const contactForm = document.getElementById("contactForm");
-    if (contactForm) {
-        contactForm.addEventListener("submit", (e) => {
-            e.preventDefault();
-            alert("Thank you for contacting Chefaro! We’ll get back to you soon.");
-            contactForm.reset();
-        });
-    }
-
-    // Chef Hire button
-    document.querySelectorAll(".hire-btn").forEach(btn => {
-        btn.addEventListener("click", () => {
-            alert("Chef hired successfully! They'll contact you shortly.");
-        });
-    });
-
-    // View Recipe button
-    document.querySelectorAll(".view-recipe").forEach(btn => {
-        btn.addEventListener("click", () => {
-            alert("Recipe details coming soon! Stay tuned 🍽️");
-        });
-    });
-});
-
-document.addEventListener("DOMContentLoaded", () => {
-    // Contact Form
-    const contactForm = document.getElementById("contactForm");
-    if (contactForm) {
-        contactForm.addEventListener("submit", (e) => {
-            e.preventDefault();
-            alert("Thank you for contacting Chefaro! We’ll get back to you soon.");
-            contactForm.reset();
-        });
-    }
-
     // Chef Hire Buttons
     document.querySelectorAll(".hire-btn").forEach(btn => {
         btn.addEventListener("click", () => {
-            alert("Chef hired successfully! They'll contact you shortly.");
-        });
-    });
-
-    // View Recipe Buttons
-    document.querySelectorAll(".view-recipe").forEach(btn => {
-        btn.addEventListener("click", () => {
-            alert("Recipe details coming soon! Stay tuned 🍽️");
+            alert("Chef hired successfully!");
         });
     });
 
@@ -86,4 +41,3 @@ document.addEventListener("DOMContentLoaded", () => {
             loginForm.classList.remove("d-none");
         });
     }
-});
