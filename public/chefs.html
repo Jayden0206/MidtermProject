@@ -165,7 +165,6 @@ document.getElementById("reviewForm").addEventListener("submit", function(e) {
 
     console.log("Submitting review:", data);
 
-    // TODO: Replace with your backend endpoint
     fetch("/submit-review", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
