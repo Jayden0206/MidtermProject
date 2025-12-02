@@ -4,8 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hire a Chef | Chefaro</title>
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Bootstrap Icons -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body class="d-flex flex-column min-vh-100">
@@ -36,43 +40,143 @@
 <!-- Chef Profiles -->
 <div class="container my-5">
     <div class="row g-4">
+
+        <!-- Chef 1 -->
         <div class="col-md-4">
             <div class="card h-100 text-center">
-                <img src="images/thiago.jpg" class="card-img-top" alt="Chef">
+                <img src="images/thiago.jpg" class="card-img-top" alt="Chef Thiago">
                 <div class="card-body">
                     <h5 class="card-title">Chef Thiago Ferreira</h5>
-                    <p class="card-text">Specializes in authentic Brazilian cuisine with over 15 years of experience.</p>
-                    <button class="btn btn-primary hire-btn">Hire Today</button>
+                    <p class="card-text">Specializes in authentic Brazilian cuisine with 15+ years of experience.</p>
+
+                    <button class="btn btn-primary mb-2">Hire Today</button>
+
+                    <!-- Review button -->
+                    <button class="btn btn-outline-secondary reviewBtn" 
+                            data-chef-id="1"
+                            data-bs-toggle="modal" 
+                            data-bs-target="#reviewModal">
+                        <i class="bi bi-star"></i> Review Chef
+                    </button>
                 </div>
             </div>
         </div>
+
+        <!-- Chef 2 -->
         <div class="col-md-4">
             <div class="card h-100 text-center">
-                <img src="images/chef2.jpg" class="card-img-top" alt="Chef">
+                <img src="images/chef2.jpg" class="card-img-top" alt="Chef Graham">
                 <div class="card-body">
                     <h5 class="card-title">Chef Graham Elliot</h5>
                     <p class="card-text">Expert in Asian fusion dishes and healthy fine dining.</p>
-                    <button class="btn btn-primary hire-btn">Hire Today</button>
+
+                    <button class="btn btn-primary mb-2">Hire Today</button>
+
+                    <button class="btn btn-outline-secondary reviewBtn" 
+                            data-chef-id="2"
+                            data-bs-toggle="modal" 
+                            data-bs-target="#reviewModal">
+                        <i class="bi bi-star"></i> Review Chef
+                    </button>
                 </div>
             </div>
         </div>
+
+        <!-- Chef 3 -->
         <div class="col-md-4">
             <div class="card h-100 text-center">
-                <img src="images/chef3.jpg" class="card-img-top" alt="Chef">
+                <img src="images/chef3.jpg" class="card-img-top" alt="Chef Joe">
                 <div class="card-body">
                     <h5 class="card-title">Chef Joe Bastianich</h5>
                     <p class="card-text">Private event chef focused on modern American cuisine and plating art.</p>
-                    <button class="btn btn-primary hire-btn">Hire Today</button>
+
+                    <button class="btn btn-primary mb-2">Hire Today</button>
+
+                    <button class="btn btn-outline-secondary reviewBtn" 
+                            data-chef-id="3"
+                            data-bs-toggle="modal" 
+                            data-bs-target="#reviewModal">
+                        <i class="bi bi-star"></i> Review Chef
+                    </button>
                 </div>
             </div>
         </div>
+
     </div>
+</div>
+
+<!-- Review Modal -->
+<div class="modal fade" id="reviewModal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h5 class="modal-title">Review Chef</h5>
+        <button class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <div class="modal-body">
+        <form id="reviewForm">
+
+          <input type="hidden" id="chefId">
+
+          <label class="form-label">Rating</label>
+          <select id="rating" class="form-select mb-3">
+            <option value="1">⭐ 1</option>
+            <option value="2">⭐ 2</option>
+            <option value="3">⭐ 3</option>
+            <option value="4">⭐ 4</option>
+            <option value="5" selected>⭐ 5</option>
+          </select>
+
+          <label class="form-label">Your Review</label>
+          <textarea id="reviewText" class="form-control mb-3" rows="4" placeholder="Write your review..."></textarea>
+
+          <button type="submit" class="btn btn-primary w-100">Submit Review</button>
+
+        </form>
+      </div>
+
+    </div>
+  </div>
 </div>
 
 <footer class="bg-dark text-light text-center py-3 mt-auto">
     <p class="mb-0">&copy; 2025 Chefaro</p>
 </footer>
 
-<script src="js/script.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+document.querySelectorAll(".reviewBtn").forEach(button => {
+    button.addEventListener("click", function() {
+        document.getElementById("chefId").value = this.dataset.chefId;
+    });
+});
+
+document.getElementById("reviewForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    const data = {
+        chefId: document.getElementById("chefId").value,
+        rating: document.getElementById("rating").value,
+        review: document.getElementById("reviewText").value
+    };
+
+    console.log("Submitting review:", data);
+
+    fetch("/submit-review", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+    })
+    .then(res => res.json())
+    .then(response => {
+        alert("Review submitted!");
+        location.reload();
+    });
+});
+</script>
+
 </body>
 </html>
