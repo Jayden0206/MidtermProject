@@ -11,12 +11,12 @@ app.use(bodyParser.json());
 // DATABASE CONNECTION
 // --------------------
 const pool = new Pool({
-  user: "postgres",       // default PostgreSQL username
-  host: "localhost",      // assuming your DB runs locally
-  database: "homework",   // your database name
-  password: "postgres",       // your PostgreSQL password
-  port: 5432,             // default port
-});
+  user: "postgres",       
+  host: "localhost",      
+  database: "homework",   
+  password: "postgres",       
+  port: 5432,             
+});  //MAKE SURE YOU HAVE THIS STUFF SET UP PROPERLY ON  PGAdmin -- AND USE http://localhost:3000
 
 pool.connect()
   .then(() => console.log("Connected to PostgreSQL database: homework"))
