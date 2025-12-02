@@ -64,6 +64,17 @@ app.post("/api/testimonials/save", async (req, res) => {
     res.status(500).send("Error saving testimonial");
   }
 });
+//----------------
+//bookings table stuff
+//----------------
+app.get("/api/bookings", async (req, res) => {
+  const result = await pool.query(`
+    SELECT booking_id, booker_username, chef_username, booking_date, status
+    FROM bookings;
+  `);
+
+  res.json(result.rows);
+});
 
 //--------------
 // Start Server

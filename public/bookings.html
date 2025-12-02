@@ -14,29 +14,39 @@
 
   <h3 class="mb-3">Bookings</h3>
 
-  <div class="table-responsive">
-    <table class="table table-striped table-hover table-bordered align-middle">
-      <thead class="table-light">
-        <tr>
-          <th scope="col">Booking ID</th>
-          <th scope="col">Username</th>
-          <th scope="col">Chef Username</th>
-          <th scope="col">Date</th>
-          <th scope="col">Status</th>
-        </tr>
-      </thead>
-      <tbody>
-        <!-- Example row -->
-        <tr>
-          <td>1</td>
-          <td>john123</td>
-          <td>chef_mario</td>
-          <td>2025-01-30</td>
-          <td><span class="badge bg-warning">PENDING</span></td>
-        </tr>
+ <table class="table" id="bookingTable">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>User</th>
+      <th>Chef</th>
+      <th>Date</th>
+      <th>Status</th>
+    </tr>
+  </thead>
+  <tbody></tbody>
+</table>
 
-        <!-- Add real data rows dynamically from Node/Postgres -->
-      </tbody>
-    </table>
+<script>
+  fetch("/api/bookings")
+    .then(res => res.json())
+    .then(data => {
+      const tbody = document.querySelector("#bookingTable tbody");
+
+      data.forEach(row => {
+        const tr = document.createElement("tr");
+
+        tr.innerHTML = `
+          <td>${row.booking_id}</td>
+          <td>${row.booker_username}</td>
+          <td>${row.chef_username}</td>
+          <td>${row.booking_date.slice(0,10)}</td>
+          <td>${row.status}</td>
+        `;
+
+        tbody.appendChild(tr);
+      });
+    });
+</script>
   </div>
 </div>
