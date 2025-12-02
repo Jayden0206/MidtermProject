@@ -14,7 +14,7 @@ const pool = new Pool({
   user: "postgres",       // default PostgreSQL username
   host: "localhost",      // assuming your DB runs locally
   database: "homework",   // your database name
-  password: "2857",       // your PostgreSQL password
+  password: "postgres",       // your PostgreSQL password
   port: 5432,             // default port
 });
 
@@ -68,6 +68,6 @@ app.post("/api/testimonials/save", async (req, res) => {
 //--------------
 // Start Server
 //--------------
-app.listen(80, () => {
-  console.log("Server running on port 80");
+app.listen(3000, () => {
+  console.log("Server running on port 3000");
 });
