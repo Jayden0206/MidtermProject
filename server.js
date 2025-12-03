@@ -15,8 +15,10 @@ const pool = new Pool({
   ssl: process.env.DB_CONN ? { rejectUnauthorized: false } : false
 });
 
-         
-;  //MAKE SURE YOU HAVE THIS STUFF SET UP PROPERLY ON  PGAdmin -- AND USE http://localhost:3000
+pool.connect()
+  .then(() => console.log("Connected to PostgreSQL database"))
+  .catch(err => console.error("Connection error:", err.message));
+
 // -------------------------
 // Sign in and Log in stuff
 // -------------------------
