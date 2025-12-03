@@ -66,7 +66,7 @@ app.post("/api/signup", async (req, res) => {
 });
 
 // log in system
-app.post("/api/login", async (req, res) => {
+app.post("/api/logIn", async (req, res) => {
     const { username, password } = req.body;
 
     try {

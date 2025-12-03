@@ -96,7 +96,7 @@ if (loginForm) {
         const username = document.getElementById("username").value;
         const password = document.getElementById("password").value;
 
-        const response = await fetch("/api/login", {
+        const response = await fetch("/api/logIn", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ username, password })
@@ -194,6 +194,6 @@ document.getElementById("signUpForm").addEventListener("submit", async (e) => {
     }
 
     alert("Account created successfully!");
-    window.location.href = "login.html";
+    window.location.href = "logIn.html";
 });
 
