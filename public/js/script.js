@@ -10,6 +10,36 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 });
 
+//Perma log-in
+document.addEventListener("DOMContentLoaded", () => {
+    const loggedIn = localStorage.getItem("loggedIn") === "true";
+
+    const navLogin = document.getElementById("navLogin");
+    const navSignup = document.getElementById("navSignup");
+    const navProfile = document.getElementById("navProfile");
+    const navLogout = document.getElementById("navLogout");
+
+    // Make sure elements exist
+    if (navLogin && navSignup && navProfile && navLogout) {
+        if (loggedIn) {
+            navLogin.style.display = "none";
+            navSignup.style.display = "none";
+            navProfile.style.display = "block";
+            navLogout.style.display = "block";
+        } else {
+            navLogin.style.display = "block";
+            navSignup.style.display = "block";
+            navProfile.style.display = "none";
+            navLogout.style.display = "none";
+        }
+
+        navLogout.addEventListener("click", () => {
+            localStorage.clear();
+            window.location.href = "index.html";
+        });
+    }
+});
+
     // Chef Hire Buttons
     document.querySelectorAll(".hire-btn").forEach(btn => {
         btn.addEventListener("click", () => {
