@@ -22,48 +22,80 @@ pool.connect()
   .then(() => console.log("Connected to PostgreSQL database: homework"))
   .catch(err => console.error("Connection error:", err.message));
 
-// -------
-// ROUTES
-// -------
+// -------------------------
+// Sign in and Log in stuff
+// -------------------------
+// sign up profile creation
+app.post("/api/signup", async (req, res) => {
+    const { username, password, isChef, description } = req.body;
 
-//
-// example from homework
-//
+    const client = await pool.connect();
 
-// GET: Retrieve all testimonials
-app.get("/api/testimonials", async (req, res) => {
-  try {
-    const result = await pool.query("SELECT author, message FROM testimonials");
-    res.json(result.rows);
-  } catch (err) {
-    console.error("Error retrieving testimonials:", err.message);
-    res.status(500).send("Error retrieving testimonials");
-  }
+    try {
+        await client.query("BEGIN");
+
+        // Insert into Profile table
+        await client.query(
+            `INSERT INTO Profile (username, password, is_chef)
+             VALUES ($1, $2, $3)`,
+            [username, password, isChef]
+        );
+
+        // If user is a chef, insert into Chefs table too
+        if (isChef === "Y") {
+            await client.query(
+                `INSERT INTO Chef (username, avg_rating, description)
+                 VALUES ($1, 0, $2)`,
+                [username, description]
+            );
+        }
+
+        await client.query("COMMIT");
+        res.status(201).json({ message: "Profile created successfully" });
+
+    } catch (err) {
+        await client.query("ROLLBACK");
+        console.error(err);
+
+        if (err.code === "23505") {
+            res.status(400).json({ error: "Username already exists" });
+        } else {
+            res.status(500).json({ error: "Server error" });
+        }
+
+    } finally {
+        client.release();
+    }
 });
 
-//
-// example from homework
-//
+// log in system
+app.post("/api/login", async (req, res) => {
+    const { username, password } = req.body;
 
-// POST: Save a new testimonial
-app.post("/api/testimonials/save", async (req, res) => {
-  const { author, message } = req.body;
+    try {
+        const result = await pool.query(
+            `SELECT username, is_chef 
+             FROM Profile 
+             WHERE username = $1 AND password = $2`,
+            [username, password]
+        );
 
-  if (!author || !message) {
-    return res.status(400).json({ error: "Author and message are required." });
-  }
+        if (result.rows.length === 0) {
+            return res.status(401).json({ error: "Invalid username or password" });
+        }
 
-  try {
-    await pool.query(
-      "INSERT INTO testimonials (author, message) VALUES ($1, $2)",
-      [author, message]
-    );
-    res.status(201).json({ success: true, message: "Testimonial saved!" });
-  } catch (err) {
-    console.error("Error saving testimonial:", err.message);
-    res.status(500).send("Error saving testimonial");
-  }
+        // Login successful
+        res.json({
+            message: "Login successful",
+            user: result.rows[0]
+        });
+
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: "Server error" });
+    }
 });
+
 //----------------
 //bookings table stuff
 //----------------
