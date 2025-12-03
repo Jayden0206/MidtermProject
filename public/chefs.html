@@ -6,11 +6,65 @@
     <title>Hire a Chef | Chefaro</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Bootstrap Icons -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
 
-    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* Body and header */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f8f9fa;
+        }
+        header {
+            background: #f1f1f1;
+        }
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Chef cards */
+        .card-img-top {
+            border-top-left-radius: 15px;
+            border-top-right-radius: 15px;
+            height: 550px;
+            object-fit: cover;
+}
+        .card {
+            border-radius: 15px;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 24px rgba(0,0,0,0.15);
+        }
+
+        /* Review button */
+        .reviewBtn {
+            background: linear-gradient(45deg, #f39c12, #e74c3c);
+            border: none;
+            border-radius: 50px;
+            color: #fff;
+            font-weight: bold;
+            padding: 8px 20px;
+            margin-top: 8px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .reviewBtn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+            background: linear-gradient(45deg, #e67e22, #c0392b);
+        }
+        .reviewBtn i {
+            margin-right: 6px;
+        }
+
+        /* Footer */
+        footer {
+            background: #343a40;
+            color: #fff;
+        }
+    </style>
 </head>
 <body class="d-flex flex-column min-vh-100">
 
@@ -33,7 +87,8 @@
     </div>
 </nav>
 
-<header class="text-center py-5 bg-light">
+<!-- Header -->
+<header class="text-center py-5">
     <h1 class="fw-bold">Hire a Chef</h1>
     <p class="text-muted">Bring restaurant-quality dining to your home.</p>
 </header>
@@ -50,19 +105,15 @@
                     <h5 class="card-title">Chef Thiago Ferreira</h5>
                     <p class="card-text">Specializes in authentic Brazilian cuisine with 15+ years of experience.</p>
 
-                    <button class="btn btn-primary viewBtn"
-                             data-chef-id="1"
-                            data-bs-toggle="modal"
-                            data-bs-target="#viewModal">
-                         <i class="bi bi-person"></i> More Information
+                    <button class="btn btn-primary mb-2">
+                        <i class="bi bi-person"></i> More Information
                     </button>
                     
-                    <!-- Review button -->
-                    <button class="btn btn-outline-secondary reviewBtn" 
+                    <button class="reviewBtn" 
                             data-chef-id="1"
                             data-bs-toggle="modal" 
                             data-bs-target="#reviewModal">
-                        <i class="bi bi-star"></i> Review Chef
+                        <i class="bi bi-star-fill"></i> Review Chef
                     </button>
                 </div>
             </div>
@@ -76,13 +127,15 @@
                     <h5 class="card-title">Chef Graham Elliot</h5>
                     <p class="card-text">Expert in Asian fusion dishes and healthy fine dining.</p>
 
-                    <button class="btn btn-primary mb-2">More Information</button>
+                    <button class="btn btn-primary mb-2">
+                        <i class="bi bi-person"></i> More Information
+                    </button>
 
-                    <button class="btn btn-outline-secondary reviewBtn" 
+                    <button class="reviewBtn" 
                             data-chef-id="2"
                             data-bs-toggle="modal" 
                             data-bs-target="#reviewModal">
-                        <i class="bi bi-star"></i> Review Chef
+                        <i class="bi bi-star-fill"></i> Review Chef
                     </button>
                 </div>
             </div>
@@ -96,13 +149,15 @@
                     <h5 class="card-title">Chef Joe Bastianich</h5>
                     <p class="card-text">Private event chef focused on modern American cuisine and plating art.</p>
 
-                    <button class="btn btn-primary mb-2">More Information</button>
+                    <button class="btn btn-primary mb-2">
+                        <i class="bi bi-person"></i> More Information
+                    </button>
 
-                    <button class="btn btn-outline-secondary reviewBtn" 
+                    <button class="reviewBtn" 
                             data-chef-id="3"
                             data-bs-toggle="modal" 
                             data-bs-target="#reviewModal">
-                        <i class="bi bi-star"></i> Review Chef
+                        <i class="bi bi-star-fill"></i> Review Chef
                     </button>
                 </div>
             </div>
@@ -152,36 +207,33 @@
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-
 <script>
-document.querySelectorAll(".reviewBtn").forEach(button => {
-    button.addEventListener("click", function() {
-        document.getElementById("chefId").value = this.dataset.chefId;
+    // Show chef ID alert when clicking Review
+    document.querySelectorAll(".reviewBtn").forEach(button => {
+        button.addEventListener("click", function() {
+            document.getElementById("chefId").value = this.dataset.chefId;
+            alert(`You are reviewing Chef ID: ${this.dataset.chefId}`);
+        });
     });
-});
 
-document.getElementById("reviewForm").addEventListener("submit", function(e) {
-    e.preventDefault();
+    // Submit review
+    document.getElementById("reviewForm").addEventListener("submit", function(e) {
+        e.preventDefault();
+        const data = {
+            chefId: document.getElementById("chefId").value,
+            rating: document.getElementById("rating").value,
+            review: document.getElementById("reviewText").value
+        };
+        console.log("Submitting review:", data);
 
-    const data = {
-        chefId: document.getElementById("chefId").value,
-        rating: document.getElementById("rating").value,
-        review: document.getElementById("reviewText").value
-    };
+        // Show alert instead of fetch for demo
+        alert("Review submitted successfully!");
 
-    console.log("Submitting review:", data);
-
-    fetch("/submit-review", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data)
-    })
-    .then(res => res.json())
-    .then(response => {
-        alert("Review submitted!");
-        location.reload();
+        // Reset form
+        this.reset();
+        var reviewModal = bootstrap.Modal.getInstance(document.getElementById('reviewModal'));
+        reviewModal.hide();
     });
-});
 </script>
 
 </body>
