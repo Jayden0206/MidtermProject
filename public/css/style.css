@@ -48,3 +48,96 @@ footer {
 .btn-primary:hover {
   background-color: #ff875a;
 }
+.chefs-page .btn-primary {
+  background-color: #0d6efd !important;
+  border-color: #0d6efd !important;
+}
+.chefs-page .btn-primary:hover {
+  background-color: #0b5ed7 !important;
+  border-color: #0a58ca !important;
+}
+
+/* --------------------------------------------
+   CHEF PAGE/REVIEW BUTTON STUFF 
+   -------------------------------------------- */
+
+.chefs-page {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #f8f9fa;
+}
+
+.chefs-page header {
+    background: #f1f1f1;
+}
+
+.chefs-page header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+}
+
+/* card */
+.chefs-page .card-img-top {
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    height: 550px;
+    object-fit: cover;
+}
+
+.chefs-page .card {
+    border-radius: 15px;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.chefs-page .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 24px rgba(0,0,0,0.15);
+}
+
+/* review button  */
+.chefs-page .reviewBtn {
+    background: linear-gradient(45deg, #f39c12, #e74c3c);
+    border: none;
+    border-radius: 50px;
+    color: #fff;
+    font-weight: bold;
+    padding: 8px 20px;
+    margin-top: 8px;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.chefs-page .reviewBtn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+    background: linear-gradient(45deg, #e67e22, #c0392b);
+}
+
+.chefs-page .reviewBtn i {
+    margin-right: 6px;
+}
+
+.reviewBtn {
+    background: linear-gradient(45deg, #f39c12, #e74c3c);
+    border: none;
+    border-radius: 50px;
+    color: #fff;
+    font-weight: bold;
+    padding: 8px 20px;
+    margin-top: 8px;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.reviewBtn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+    background: linear-gradient(45deg, #e67e22, #c0392b);
+}
+
+.reviewBtn i {
+    margin-right: 6px;
+}
+
+footer {
+    background: #343a40;
+    color: #fff;
+}
