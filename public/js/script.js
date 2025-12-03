@@ -47,6 +47,54 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
+
+    // Request Booking Buttons
+document.addEventListener("DOMContentLoaded", () => {
+    const bookingButtons = document.querySelectorAll(".request-booking-btn");
+
+    bookingButtons.forEach(button => {
+        button.addEventListener("click", async () => {
+            // Check if user is logged in
+            const loggedIn = localStorage.getItem("loggedIn") === "true";
+            if (!loggedIn) {
+                alert("Please log in to request a booking!");
+                window.location.href = "logIn.html";
+                return;
+            }
+
+            const bookerUsername = localStorage.getItem("username");
+            const chefUsername = button.dataset.chefUsername;
+            
+            // Get today's date in YYYY-MM-DD format
+            const today = new Date().toISOString().split('T')[0];
+
+            try {
+                const response = await fetch("http://localhost:3000/api/bookings", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                        booker_username: bookerUsername,
+                        chef_username: chefUsername,
+                        booking_date: today
+                    })
+                });
+
+                const data = await response.json();
+
+                if (!response.ok) {
+                    alert("Error: " + data.error);
+                    return;
+                }
+
+                alert(`Booking request successful! Your booking ID is ${data.booking_id}`);
+            } catch (error) {
+                console.error("Error creating booking:", error);
+                alert("Failed to create booking. Please try again.");
+            }
+        });
+    });
+});
+
 //Login System
 const loginForm = document.getElementById("loginForm");
 

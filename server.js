@@ -108,6 +108,28 @@ app.get("/api/bookings", async (req, res) => {
   res.json(result.rows);
 });
 
+//Create a new booking
+app.post("/api/bookings", async (req, res) => {
+  const { booker_username, chef_username, booking_date } = req.body;
+
+  try {
+    const result = await pool.query(
+      `INSERT INTO bookings (booker_username, chef_username, booking_date, status)
+       VALUES ($1, $2, $3, 'PENDING')
+       RETURNING booking_id`,
+      [booker_username, chef_username, booking_date]
+    );
+
+    res.status(201).json({ 
+      message: "Booking request successful", 
+      booking_id: result.rows[0].booking_id 
+    });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Server error" });
+  }
+});
+
 //--------------
 // Start Server
 //--------------
