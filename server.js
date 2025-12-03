@@ -11,17 +11,12 @@ app.use(bodyParser.json());
 // DATABASE CONNECTION
 // --------------------
 const pool = new Pool({
-  user: "postgres",       
-  host: "localhost",      
-  database: "homework",   
-  password: "postgres",       
-  port: 5432,             
-});  //MAKE SURE YOU HAVE THIS STUFF SET UP PROPERLY ON  PGAdmin -- AND USE http://localhost:3000
+  connectionString: process.env.DB_CONN || "postgresql://postgres:postgres@localhost:5432/homework",
+  ssl: process.env.DB_CONN ? { rejectUnauthorized: false } : false
+});
 
-pool.connect()
-  .then(() => console.log("Connected to PostgreSQL database: homework"))
-  .catch(err => console.error("Connection error:", err.message));
-
+         
+;  //MAKE SURE YOU HAVE THIS STUFF SET UP PROPERLY ON  PGAdmin -- AND USE http://localhost:3000
 // -------------------------
 // Sign in and Log in stuff
 // -------------------------
