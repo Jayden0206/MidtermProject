@@ -40,13 +40,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 });
 
-    // Chef Hire Buttons
-    document.querySelectorAll(".hire-btn").forEach(btn => {
-        btn.addEventListener("click", () => {
-            alert("Chef hired successfully!");
-        });
-    });
-
 
     // Request Booking Buttons
 document.addEventListener("DOMContentLoaded", () => {
@@ -54,10 +47,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     bookingButtons.forEach(button => {
         button.addEventListener("click", async () => {
-            // Check if user is logged in
             const loggedIn = localStorage.getItem("loggedIn") === "true";
             if (!loggedIn) {
-                alert("Please log in to request a booking!");
+                alert("Please log in to request a booking.");
                 window.location.href = "logIn.html";
                 return;
             }
@@ -65,7 +57,6 @@ document.addEventListener("DOMContentLoaded", () => {
             const bookerUsername = localStorage.getItem("username");
             const chefUsername = button.dataset.chefUsername;
             
-            // Get today's date in YYYY-MM-DD format
             const today = new Date().toISOString().split('T')[0];
 
             try {
@@ -86,7 +77,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     return;
                 }
 
-                alert(`Booking request successful! Your booking ID is ${data.booking_id}`);
+                alert(`Booking request successful!`);
             } catch (error) {
                 console.error("Error creating booking:", error);
                 alert("Failed to create booking. Please try again.");
