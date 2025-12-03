@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", function() {
     if (contactForm) {
         contactForm.addEventListener("submit", function(e) {
             e.preventDefault();
-            alert("Thank you for contacting Chefaro! We’ll get back to you soon.");
+            alert("Thank you for contacting Chefaro! We'll get back to you soon.");
             contactForm.reset();
         });
     }
@@ -40,8 +40,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 });
 
-
-    // Request Booking Buttons
+// Request Booking Buttons
 document.addEventListener("DOMContentLoaded", () => {
     const bookingButtons = document.querySelectorAll(".request-booking-btn");
 
@@ -96,7 +95,7 @@ if (loginForm) {
         const username = document.getElementById("username").value;
         const password = document.getElementById("password").value;
 
-        const response = await fetch("/api/logIn", {
+        const response = await fetch("/api/login", {  // ✅ FIXED: Changed from /api/logIn to /api/login
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ username, password })
@@ -118,7 +117,7 @@ if (loginForm) {
     });
 }
 
-// hide and unhide links in nav bar based on log in status
+// ✅ FIXED: Added null checks for nav bar elements
 document.addEventListener("DOMContentLoaded", () => {
     const loggedIn = localStorage.getItem("loggedIn") === "true";
 
@@ -127,73 +126,81 @@ document.addEventListener("DOMContentLoaded", () => {
     const navProfile = document.getElementById("navProfile");
     const navLogout = document.getElementById("navLogout");
 
-    if (loggedIn) {
-        navLogin.classList.add("d-none");
-        navSignup.classList.add("d-none");
+    // Only manipulate if elements exist
+    if (navLogin && navSignup && navProfile && navLogout) {
+        if (loggedIn) {
+            navLogin.classList.add("d-none");
+            navSignup.classList.add("d-none");
 
-        navProfile.classList.remove("d-none");
-        navLogout.classList.remove("d-none");
-    } else {
-        navLogin.classList.remove("d-none");
-        navSignup.classList.remove("d-none");
+            navProfile.classList.remove("d-none");
+            navLogout.classList.remove("d-none");
+        } else {
+            navLogin.classList.remove("d-none");
+            navSignup.classList.remove("d-none");
 
-        navProfile.classList.add("d-none");
-        navLogout.classList.add("d-none");
+            navProfile.classList.add("d-none");
+            navLogout.classList.add("d-none");
+        }
+
+        // Logout handler
+        navLogout.addEventListener("click", () => {
+            localStorage.clear();
+            window.location.href = "index.html";
+        });
     }
+});
 
-    // Logout handler
-    navLogout.addEventListener("click", () => {
-        localStorage.clear();
-        window.location.href = "index.html";
+// ✅ FIXED: Added null check for signup form elements
+const isChefSelect = document.getElementById("isChef");
+if (isChefSelect) {
+    isChefSelect.addEventListener("change", function () {
+        const descSection = document.getElementById("chefDescriptionSection");
+
+        if (this.value === "Y") {
+            descSection.style.display = "block";
+        } else {
+            descSection.style.display = "none";
+        }
     });
-});
+}
 
-// sign up chef description box
-document.getElementById("isChef").addEventListener("change", function () {
-    const descSection = document.getElementById("chefDescriptionSection");
+// ✅ FIXED: Added null check for signup form
+const signUpForm = document.getElementById("signUpForm");
+if (signUpForm) {
+    signUpForm.addEventListener("submit", async (e) => {
+        e.preventDefault();
 
-    if (this.value === "Y") {
-        descSection.style.display = "block";
-    } else {
-        descSection.style.display = "none";
-    }
-});
+        const username = document.getElementById("username2").value;
+        const password = document.getElementById("password2").value;
+        const isChef = document.getElementById("isChef").value;
+        const description = isChef === "Y"
+            ? document.getElementById("chefDescription").value
+            : null;
 
-// sign up system
-document.getElementById("signUpForm").addEventListener("submit", async (e) => {
-    e.preventDefault();
+        const profileData = {
+            username,
+            password,
+            isChef,
+            description
+        };
 
-    const username = document.getElementById("username2").value;
-    const password = document.getElementById("password2").value;
-    const isChef = document.getElementById("isChef").value;
-    const description = isChef === "Y"
-        ? document.getElementById("chefDescription").value
-        : null;
+        console.log(username, password, isChef);
 
-    const profileData = {
-        username,
-        password,
-        isChef,
-        description
-    };
+        // Send to backend POST /api/signup
+        const response = await fetch("/api/signup", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(profileData)
+        });
 
-    console.log(username, password, isChef);
+        const data = await response.json();
 
-    // Send to backend POST /api/signup
-    const response = await fetch("/api/signup", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(profileData)
+        if (!response.ok) {
+            alert("Error: " + data.error);
+            return;
+        }
+
+        alert("Account created successfully!");
+        window.location.href = "logIn.html";
     });
-
-    const data = await response.json();
-
-    if (!response.ok) {
-        alert("Error: " + data.error);
-        return;
-    }
-
-    alert("Account created successfully!");
-    window.location.href = "logIn.html";
-});
-
+}
