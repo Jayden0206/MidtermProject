@@ -60,7 +60,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const today = new Date().toISOString().split('T')[0];
 
             try {
-                const response = await fetch("http://localhost:3000/api/bookings", {
+                const response = await fetch("/api/bookings", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({
@@ -96,7 +96,7 @@ if (loginForm) {
         const username = document.getElementById("username").value;
         const password = document.getElementById("password").value;
 
-        const response = await fetch("http://localhost:3000/api/login", {
+        const response = await fetch("/api/login", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ username, password })
@@ -180,7 +180,7 @@ document.getElementById("signUpForm").addEventListener("submit", async (e) => {
     console.log(username, password, isChef);
 
     // Send to backend POST /api/signup
-    const response = await fetch("http://localhost:3000/api/signup", {
+    const response = await fetch("/api/signup", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(profileData)
