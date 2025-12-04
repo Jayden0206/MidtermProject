@@ -1,4 +1,4 @@
-// Contact form thank-you message
+// thank you contact form
 document.addEventListener("DOMContentLoaded", function() {
     const contactForm = document.getElementById("contactForm");
     if (contactForm) {
@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const navProfile = document.getElementById("navProfile");
     const navLogout = document.getElementById("navLogout");
 
-    // Make sure elements exist
+    // login fix
     if (navLogin && navSignup && navProfile && navLogout) {
         if (loggedIn) {
             navLogin.style.display = "none";
@@ -40,7 +40,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 });
 
-// Request Booking Buttons
+// booking buttons
 document.addEventListener("DOMContentLoaded", () => {
     const bookingButtons = document.querySelectorAll(".request-booking-btn");
 
@@ -95,7 +95,7 @@ if (loginForm) {
         const username = document.getElementById("username").value;
         const password = document.getElementById("password").value;
 
-        const response = await fetch("/api/login", {  // ✅ FIXED: Changed from /api/logIn to /api/login
+        const response = await fetch("/api/login", { 
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ username, password })
@@ -117,7 +117,6 @@ if (loginForm) {
     });
 }
 
-// ✅ FIXED: Added null checks for nav bar elements
 document.addEventListener("DOMContentLoaded", () => {
     const loggedIn = localStorage.getItem("loggedIn") === "true";
 
@@ -126,7 +125,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const navProfile = document.getElementById("navProfile");
     const navLogout = document.getElementById("navLogout");
 
-    // Only manipulate if elements exist
+    // logged in nav bar stuff
     if (navLogin && navSignup && navProfile && navLogout) {
         if (loggedIn) {
             navLogin.classList.add("d-none");
@@ -142,7 +141,7 @@ document.addEventListener("DOMContentLoaded", () => {
             navLogout.classList.add("d-none");
         }
 
-        // Logout handler
+        // Logout 
         navLogout.addEventListener("click", () => {
             localStorage.clear();
             window.location.href = "index.html";
@@ -150,7 +149,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 });
 
-// ✅ FIXED: Added null check for signup form elements
 const isChefSelect = document.getElementById("isChef");
 if (isChefSelect) {
     isChefSelect.addEventListener("change", function () {
@@ -164,7 +162,6 @@ if (isChefSelect) {
     });
 }
 
-// ✅ FIXED: Added null check for signup form
 const signUpForm = document.getElementById("signUpForm");
 if (signUpForm) {
     signUpForm.addEventListener("submit", async (e) => {
@@ -186,7 +183,6 @@ if (signUpForm) {
 
         console.log(username, password, isChef);
 
-        // Send to backend POST /api/signup
         const response = await fetch("/api/signup", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
